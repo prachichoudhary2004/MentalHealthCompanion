@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PaciFy - Quiz</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../css/stylequiz.css">
+  <link href="../style.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Favicon/favicon-16x16.png">
+
+</head>
+
+<body>
+
+  <div class="navbar navbar-expand-lg bg-dark navbar-dark nav-sticky" id="navbar">
+    <div class="container-fluid">
+        <div id="logo">
+            <a href="../index.html"><img src="../images file/pic.jpg" alt="logo"></a>
+        </div>
+        <a href="../index.html" class="navbar-brand">P<span>aci</span>F<span>y</span></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto" id="mynav">
+                <a href="../index.html#hero" class="nav-item nav-link ">Home</a>
+                <a href="../index.html#about" class="nav-item nav-link">About</a>
+                <a href="../index.html#feature" class="nav-item nav-link">Features</a>
+                <a href="../index.html#yoga" class="nav-item nav-link"> Yoga Poses</a>
+                <a href="../index.html#articles" class="nav-item nav-link">Articles </a>
+                <a href="./Login.html" target="_blank" class="nav-item nav-link">Login</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+  <h2 class="quiz-header" style="margin-top:8%">Self Mental Health Check Quiz</h2>
+  <div class="main">
+    <div class="quiz">
+      <div class="header">
+
+        <div class="label"></div>
+
+      </div>
+      <div class="quiz-body">
+        <img src="../images file/yoga.png" alt="yoga-logo" class="yoga-logo">
+        <div id="questions">
+        </div>
+        <div>
+          <button class="nextQues" class="ml-5" onclick="nextQues()">Next Question <span>&#10132;</span></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script src="../scripts/quiz.js">
+  </script>
+</body>
+
+</html>

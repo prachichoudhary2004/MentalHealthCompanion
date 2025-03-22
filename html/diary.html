@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="../css/diary_style.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"
+      integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon/favicon-16x16.png">
+    <title>My Diary App</title>
+  </head>
+  <body>
+    <header><h1 class="title">My Personal Journal</h1></header>
+
+    <!-- Journal Entry Section -->
+    <section class="section journal-section">
+      <div class="container">
+        <div class="container-row container-row-journal">
+          <div class="container-item container-item-journal">
+            <form id="entryForm" action="">
+              <label for="entry-title" class="journal-label">Entry Title</label>
+              <input
+                type="text"
+                name="entry-title"
+                id="entry-title"
+                class="entry-text-title"
+                placeholder="Name of entry ✏️"
+              />
+              <label for="entry" class="journal-label">Today's Entry</label>
+              <textarea
+                name="daily-entry"
+                id="entry"
+                class="entry-text-box"
+                placeholder="What's on your mind today? 💭"
+              ></textarea>
+              <button class="btn-main entry-submit-btn" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journal Entry Results -->
+    <section class="section sectionEntryResults" id="entryResultsSection">
+      <h2 class="heading-results">Journal Entries</h2>
+      <div class="container">
+        <div class="container-row entryResultRow"></div>
+      </div>
+    </section>
+
+    <script src="../scripts/mental_diary.js"></script>
+    
+  </body>
+</html>
