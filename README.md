@@ -1,6 +1,3 @@
-Got it! Here’s a clean, professional, and fully customized `README.md` for your SoulZen mental health wellness app project, written in the same polished style you showed — clear, structured, and easy to read.
-
----
 
  🌿 SoulZen – Mental Health Wellness Application
 
