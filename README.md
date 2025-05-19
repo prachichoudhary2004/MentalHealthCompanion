@@ -1,4 +1,4 @@
-
+  
  🌿 SoulZen – Mental Health Wellness Application
 
 SoulZen is a user-friendly web application designed to provide accessible mental health support through multiple interactive tools. It empowers users to self-assess their mental well-being, learn about mental health, relax with peaceful music, practice yoga poses, and receive empathetic support from an AI chatbot — all within a single platform.
