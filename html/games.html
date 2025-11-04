@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relaxing Games - SoulZen</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="navbar navbar-expand-lg bg-dark navbar-dark nav-sticky" id="navbar">
+    <div class="container-fluid">
+      <div id="logo">
+        <a href="../frontend/index.html"><img src="../images file/pic.jpg" alt="logo"></a>
+      </div>
+      <a href="../frontend/index.html" class="navbar-brand">S<span>oul</span>Z<span>en</span></a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto" id="mynav">
+          <a href="../frontend/index.html#hero" class="nav-item nav-link">Home</a>
+          <a href="../frontend/index.html#about" class="nav-item nav-link">About</a>
+          <a href="../frontend/index.html#feature" class="nav-item nav-link">Features</a>
+          <a href="../frontend/index.html#yoga" class="nav-item nav-link">Yoga Poses</a>
+          <a href="./music.html" class="nav-item nav-link">Peace Box</a>
+          <a href="./games.html" class="nav-item nav-link active">Relaxing Games</a>
+          <a href="./articles.html" class="nav-item nav-link">Articles</a>
+          <a href="./therapists.html" class="nav-item nav-link">Therapist Finder</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 100px;">
+    <style>
+      .card { border: 0; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,.06); }
+      .card h4 { color:#006622; }
+      .btn.btn-success { background:#006622; border-color:#006622; }
+      .btn.btn-success:hover { filter: brightness(1.05); }
+    </style>
+    <div class="section-header text-center">
+      <h2>Relaxing Games</h2>
+      <p>Take a short mindful break with these simple, calming activities.</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="d-flex flex-wrap" style="gap:10px;justify-content:center">
+          <button class="btn btn-success" data-game="breathing">Play Breathing Bubble</button>
+          <button class="btn btn-success" data-game="focus">Play Focus Dot</button>
+          <button class="btn btn-success" data-game="memory">Play Memory Calm</button>
+          <button class="btn btn-success" data-game="slider">Play Soothing Slider</button>
+          <button class="btn btn-success" data-game="cloud">Play Cloud Taps</button>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4" id="game-breathing" style="display:none;">
+        <div class="card p-4">
+          <h4>Breathing Bubble</h4>
+          <p>Follow the circle as it expands and contracts. Inhale as it expands, exhale as it shrinks.</p>
+          <div id="bubble" style="width:120px;height:120px;border-radius:50%;background:#b3e283;margin:20px auto;"></div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4" id="game-focus" style="display:none;">
+        <div class="card p-4">
+          <h4>Focus Dot</h4>
+          <p>Stare gently at the dot for 30 seconds. Let thoughts pass without judgement.</p>
+          <div style="display:flex;justify-content:center;align-items:center;height:160px;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#006622;"><!-- dot --></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-4" id="game-memory" style="display:none;">
+        <div class="card p-4">
+          <h4>Memory Calm</h4>
+          <p>Click tiles to match pairs. Move slowly and breathe between clicks.</p>
+          <div id="grid" class="d-flex flex-wrap" style="gap:10px"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4" id="game-slider" style="display:none;">
+        <div class="card p-4">
+          <h4>Soothing Slider</h4>
+          <p>Drag the slider slowly from left to right, synchronizing breath with movement.</p>
+          <input id="soothe" type="range" min="0" max="100" value="0" class="w-100" />
+          <div id="sootheBox" style="height:16px;background:#e6ffee;margin-top:12px;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4" id="game-cloud" style="display:none;">
+        <div class="card p-4">
+          <h4>Cloud Taps</h4>
+          <p>Tap a drifting cloud occasionally; don’t rush. Aim for 5 taps only.</p>
+          <div id="sky" style="position:relative;height:160px;background:linear-gradient(180deg,#cfead3,#ffffff);overflow:hidden;border-radius:6px">
+            <div id="cloud" style="position:absolute;left:-120px;top:40px;width:120px;height:60px;background:#fff;border-radius:30px;box-shadow:40px 10px 0 0 #fff, 80px 0 0 0 #fff"></div>
+          </div>
+          <div class="mt-2"><small>Cloud taps: <span id="taps">0</span> / 5</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle games on Play clicks
+    (function(){
+      var buttons = document.querySelectorAll('button[data-game]');
+      var ids = {
+        breathing: 'game-breathing',
+        focus: 'game-focus',
+        memory: 'game-memory',
+        slider: 'game-slider',
+        cloud: 'game-cloud'
+      };
+      function hideAll(){ Object.values(ids).forEach(id=>{ var el=document.getElementById(id); if(el) el.style.display='none'; }); }
+      buttons.forEach(btn=>{
+        btn.addEventListener('click', function(){ hideAll(); var el = document.getElementById(ids[this.dataset.game]); if(el) el.style.display='block'; window.scrollTo({top: el.offsetTop-80, behavior:'smooth'}); });
+      });
+    })();
+
+    // Breathing bubble animation
+    (function(){
+      var bubble = document.getElementById('bubble');
+      var grow = true; var size = 120;
+      setInterval(function(){
+        size += grow ? 2 : -2;
+        if(size >= 180) grow = false;
+        if(size <= 120) grow = true;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
+      }, 60);
+    })();
+
+    // Simple memory game (4 pairs)
+    (function(){
+      var symbols = ['🙂','🌿','💧','🌙'];
+      var tiles = symbols.concat(symbols).sort(() => Math.random()-0.5);
+      var grid = document.getElementById('grid');
+      var first = null; var lock = false; var matched = 0;
+      tiles.forEach((sym, idx)=>{
+        var btn = document.createElement('button');
+        btn.className = 'btn btn-outline-success';
+        btn.style.width='60px'; btn.style.height='60px'; btn.style.fontSize='24px';
+        btn.dataset.sym = sym; btn.textContent = '•';
+        btn.addEventListener('click', function(){
+          if(lock || btn.disabled) return;
+          btn.textContent = sym;
+          if(!first){ first = btn; return; }
+          if(first.dataset.sym === sym && first !== btn){
+            first.disabled = true; btn.disabled = true; matched += 2; first = null;
+          } else {
+            lock = true; setTimeout(()=>{ first.textContent='•'; btn.textContent='•'; first=null; lock=false; }, 600);
+          }
+        });
+        grid.appendChild(btn);
+      });
+    })();
+
+    // Soothing Slider visual
+    (function(){
+      var s = document.getElementById('soothe');
+      var box = document.getElementById('sootheBox');
+      s && s.addEventListener('input', function(){
+        box.style.background = `linear-gradient(90deg,#b3e283 ${s.value}%, #e6ffee ${s.value}%)`;
+      });
+    })();
+
+    // Cloud slow drift and tap count
+    (function(){
+      var cloud = document.getElementById('cloud');
+      var sky = document.getElementById('sky');
+      var taps = document.getElementById('taps');
+      if(!cloud || !sky) return;
+      var x = -120; var count = 0;
+      setInterval(function(){
+        x += 0.6; if(x > sky.clientWidth) x = -120; cloud.style.left = x + 'px';
+      }, 30);
+      cloud.addEventListener('click', function(){
+        if(count < 5){ count++; taps.textContent = count; }
+      });
+    })();
+  </script>
+
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/chatbot-widget.js"></script>
+</body>
+</html>

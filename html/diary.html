@@ -25,7 +25,19 @@
     <title>My Diary App</title>
   </head>
   <body>
-    <header><h1 class="title">My Personal Journal</h1></header>
+    <header>
+      <h1 class="title">My Personal Journal</h1>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto" id="mynav">
+          <a href="../frontend/index.html#hero" class="nav-item nav-link ">Home</a>
+          <a href="../frontend/index.html#about" class="nav-item nav-link">About</a>
+          <a href="../frontend/index.html#feature" class="nav-item nav-link">Features</a>
+          <a href="../frontend/index.html#yoga" class="nav-item nav-link"> Yoga Poses</a>
+          <a href="./articles.html" class="nav-item nav-link">Articles</a>
+          <a href="./games.html" class="nav-item nav-link">Relaxing Games</a>
+        </div>
+      </div>
+    </header>
 
     <!-- Journal Entry Section -->
     <section class="section journal-section">
@@ -64,6 +76,8 @@
     </section>
 
     <script src="../scripts/mental_diary.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/chatbot-widget.js"></script>
     
   </body>
 </html>

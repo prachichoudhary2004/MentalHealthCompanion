@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Tracker - SoulZen</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../style.css" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../Favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../Favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../Favicon/favicon-16x16.png">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar navbar-expand-lg bg-dark navbar-dark nav-sticky" id="navbar">
+    <div class="container-fluid">
+      <div id="logo">
+        <a href="../index.html"><img src="../images file/pic.jpg" alt="logo"></a>
+      </div>
+      <a href="../index.html" class="navbar-brand">S<span>oul</span>Z<span>en</span></a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto" id="mynav">
+          <a href="../index.html#hero" class="nav-item nav-link">Home</a>
+          <a href="../index.html#about" class="nav-item nav-link">About</a>
+          <a href="../index.html#feature" class="nav-item nav-link">Features</a>
+          <a href="../index.html#yoga" class="nav-item nav-link">Yoga Poses</a>
+          <a href="../index.html#articles" class="nav-item nav-link">Articles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 80px;">
+    <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+      <h2>Mood Tracker</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <form id="mood-form" class="form-inline justify-content-center mb-4">
+          <label class="mr-2">Score (1-10)</label>
+          <input type="number" id="mood-score" class="form-control mr-2" min="1" max="10" value="5" required />
+          <input type="text" id="mood-note" class="form-control mr-2" placeholder="Notes (optional)" />
+          <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+        <p id="mood-error" class="text-danger text-center" style="display:none;"></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Your History</h4>
+        <ul id="mood-list" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/jquery-3.4.1.min.js"></script>
+  <script src="../scripts/bootstrap.bundle.min.js"></script>
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/mood.js"></script>
+  <script src="../scripts/chatbot-widget.js"></script>
+</body>
+</html>

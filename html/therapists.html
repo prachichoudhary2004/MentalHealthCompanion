@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Therapist Finder - SoulZen</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="navbar navbar-expand-lg bg-dark navbar-dark nav-sticky" id="navbar">
+    <div class="container-fluid">
+      <div id="logo">
+        <a href="../frontend/index.html"><img src="../images file/pic.jpg" alt="logo"></a>
+      </div>
+      <a href="../frontend/index.html" class="navbar-brand">S<span>oul</span>Z<span>en</span></a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav ml-auto" id="mynav">
+          <a href="../frontend/index.html#hero" class="nav-item nav-link">Home</a>
+          <a href="../frontend/index.html#about" class="nav-item nav-link">About</a>
+          <a href="../frontend/index.html#feature" class="nav-item nav-link">Features</a>
+          <a href="../frontend/index.html#yoga" class="nav-item nav-link">Yoga Poses</a>
+          <a href="./music.html" class="nav-item nav-link">Peace Box</a>
+          <a href="./games.html" class="nav-item nav-link">Relaxing Games</a>
+          <a href="../frontend/index.html#articles" class="nav-item nav-link">Articles</a>
+          <a href="#" class="nav-item nav-link active">Therapist Finder</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 100px; max-width: 900px;">
+    <style>
+      #results .therapist-card { border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,.06); margin-bottom: 14px; padding: 14px; display:flex; align-items:center; }
+      #results img.thumb { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin-right: 12px; }
+      #results .meta { font-size: 13px; color:#666; }
+      #search-form .btn-primary { background:#006622; border-color:#006622; }
+      h2 { color:#006622; }
+    </style>
+    <div class="section-header text-center">
+      <h2>Find a Therapist</h2>
+      <p>Search by city and specialty. Data is a curated starter list you can extend.</p>
+    </div>
+
+    <form id="search-form" class="form-inline justify-content-center mb-4">
+      <input id="city" class="form-control mr-2" type="text" placeholder="City (e.g., Bengaluru)" />
+      <select id="specialty" class="form-control mr-2">
+        <option value="">Any Specialty</option>
+        <option>Anxiety</option>
+        <option>Depression</option>
+        <option>Relationships</option>
+        <option>Adolescents</option>
+        <option>Trauma</option>
+      </select>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+    <div id="results" class="list-group"></div>
+  </div>
+
+  <script>
+    const DATA = [
+      { name:'Dr. Aisha Kumar', city:'Bengaluru, KA', specialty:'Anxiety', contact:'+91-90000-11111', img:'https://picsum.photos/seed/a1/96' },
+      { name:'Dr. Rahul Singh', city:'Delhi, DL', specialty:'Depression', contact:'+91-90000-22222', img:'https://picsum.photos/seed/a2/96' },
+      { name:'Dr. Neha Patel', city:'Mumbai, MH', specialty:'Relationships', contact:'+91-90000-33333', img:'https://picsum.photos/seed/a3/96' },
+      { name:'Dr. Iqbal Hussain', city:'Hyderabad, TS', specialty:'Trauma', contact:'+91-90000-44444', img:'https://picsum.photos/seed/a4/96' },
+      { name:'Dr. Ananya Verma', city:'Bengaluru, KA', specialty:'Adolescents', contact:'+91-90000-55555', img:'https://picsum.photos/seed/a5/96' },
+      { name:'Dr. Kavya Rao', city:'Chennai, TN', specialty:'Anxiety', contact:'+91-90000-10001', img:'https://picsum.photos/seed/a6/96' },
+      { name:'Dr. Manish Gupta', city:'Pune, MH', specialty:'Depression', contact:'+91-90000-10002', img:'https://picsum.photos/seed/a7/96' },
+      { name:'Dr. Ritu Sharma', city:'Jaipur, RJ', specialty:'Relationships', contact:'+91-90000-10003', img:'https://picsum.photos/seed/a8/96' },
+      { name:'Dr. Farhan Ali', city:'Lucknow, UP', specialty:'Trauma', contact:'+91-90000-10004', img:'https://picsum.photos/seed/a9/96' },
+      { name:'Dr. Priya Menon', city:'Kochi, KL', specialty:'Adolescents', contact:'+91-90000-10005', img:'https://picsum.photos/seed/a10/96' },
+      { name:'Dr. Suresh Nair', city:'Trivandrum, KL', specialty:'Anxiety', contact:'+91-90000-10006', img:'https://picsum.photos/seed/a11/96' },
+      { name:'Dr. Sneha Desai', city:'Ahmedabad, GJ', specialty:'Depression', contact:'+91-90000-10007', img:'https://picsum.photos/seed/a12/96' },
+      { name:'Dr. Arjun Mehta', city:'Surat, GJ', specialty:'Relationships', contact:'+91-90000-10008', img:'https://picsum.photos/seed/a13/96' },
+      { name:'Dr. Nivedita Joshi', city:'Nagpur, MH', specialty:'Trauma', contact:'+91-90000-10009', img:'https://picsum.photos/seed/a14/96' },
+      { name:'Dr. Vikas Bhat', city:'Srinagar, JK', specialty:'Adolescents', contact:'+91-90000-10010', img:'https://picsum.photos/seed/a15/96' },
+      { name:'Dr. Meera Kapoor', city:'Noida, UP', specialty:'Anxiety', contact:'+91-90000-10011', img:'https://picsum.photos/seed/a16/96' },
+      { name:'Dr. Rohit Jain', city:'Gurgaon, HR', specialty:'Depression', contact:'+91-90000-10012', img:'https://picsum.photos/seed/a17/96' },
+      { name:'Dr. Aparna S', city:'Mysuru, KA', specialty:'Relationships', contact:'+91-90000-10013', img:'https://picsum.photos/seed/a18/96' },
+      { name:'Dr. Varun Shetty', city:'Mangalore, KA', specialty:'Trauma', contact:'+91-90000-10014', img:'https://picsum.photos/seed/a19/96' },
+      { name:'Dr. Aditi Kulkarni', city:'Thane, MH', specialty:'Adolescents', contact:'+91-90000-10015', img:'https://picsum.photos/seed/a20/96' },
+      { name:'Dr. Zoya Khan', city:'Bhopal, MP', specialty:'Anxiety', contact:'+91-90000-10016', img:'https://picsum.photos/seed/a21/96' },
+      { name:'Dr. Ashish Roy', city:'Indore, MP', specialty:'Depression', contact:'+91-90000-10017', img:'https://picsum.photos/seed/a22/96' },
+      { name:'Dr. Pooja Arora', city:'Chandigarh, CH', specialty:'Relationships', contact:'+91-90000-10018', img:'https://picsum.photos/seed/a23/96' },
+      { name:'Dr. Neeraj Katyal', city:'Amritsar, PB', specialty:'Trauma', contact:'+91-90000-10019', img:'https://picsum.photos/seed/a24/96' },
+      { name:'Dr. Tania Gill', city:'Ludhiana, PB', specialty:'Adolescents', contact:'+91-90000-10020', img:'https://picsum.photos/seed/a25/96' },
+      { name:'Dr. Rohan Das', city:'Kolkata, WB', specialty:'Anxiety', contact:'+91-90000-10021', img:'https://picsum.photos/seed/a26/96' },
+      { name:'Dr. Nisha Sen', city:'Howrah, WB', specialty:'Depression', contact:'+91-90000-10022', img:'https://picsum.photos/seed/a27/96' },
+      { name:'Dr. Abhay Bose', city:'Guwahati, AS', specialty:'Relationships', contact:'+91-90000-10023', img:'https://picsum.photos/seed/a28/96' },
+      { name:'Dr. Rhea Paul', city:'Shillong, ML', specialty:'Trauma', contact:'+91-90000-10024', img:'https://picsum.photos/seed/a29/96' },
+      { name:'Dr. Sanjay R', city:'Vijayawada, AP', specialty:'Adolescents', contact:'+91-90000-10025', img:'https://picsum.photos/seed/a30/96' },
+      { name:'Dr. Akarsh Iyer', city:'Visakhapatnam, AP', specialty:'Anxiety', contact:'+91-90000-10026', img:'https://picsum.photos/seed/a31/96' },
+      { name:'Dr. Kiran Kumar', city:'Warangal, TS', specialty:'Depression', contact:'+91-90000-10027', img:'https://picsum.photos/seed/a32/96' },
+      { name:'Dr. Gauri Bhatt', city:'Udaipur, RJ', specialty:'Relationships', contact:'+91-90000-10028', img:'https://picsum.photos/seed/a33/96' },
+      { name:'Dr. Hemant Rao', city:'Rajkot, GJ', specialty:'Trauma', contact:'+91-90000-10029', img:'https://picsum.photos/seed/a34/96' },
+      { name:'Dr. Simran Kaur', city:'Patiala, PB', specialty:'Adolescents', contact:'+91-90000-10030', img:'https://picsum.photos/seed/a35/96' },
+      { name:'Dr. Ankit Sinha', city:'Patna, BR', specialty:'Anxiety', contact:'+91-90000-10031', img:'https://picsum.photos/seed/a36/96' },
+      { name:'Dr. Rishi Jha', city:'Ranchi, JH', specialty:'Depression', contact:'+91-90000-10032', img:'https://picsum.photos/seed/a37/96' },
+      { name:'Dr. Madhuri Deo', city:'Bhubaneswar, OD', specialty:'Relationships', contact:'+91-90000-10033', img:'https://picsum.photos/seed/a38/96' },
+      { name:'Dr. Ananya Das', city:'Cuttack, OD', specialty:'Trauma', contact:'+91-90000-10034', img:'https://picsum.photos/seed/a39/96' },
+      { name:'Dr. Jay Mehta', city:'Vadodara, GJ', specialty:'Adolescents', contact:'+91-90000-10035', img:'https://picsum.photos/seed/a40/96' },
+      { name:'Dr. Rehan Shaikh', city:'Aurangabad, MH', specialty:'Anxiety', contact:'+91-90000-10036', img:'https://picsum.photos/seed/a41/96' },
+      { name:'Dr. Sagar Kulkarni', city:'Kolhapur, MH', specialty:'Depression', contact:'+91-90000-10037', img:'https://picsum.photos/seed/a42/96' },
+      { name:'Dr. Saloni Jain', city:'Indore, MP', specialty:'Relationships', contact:'+91-90000-10038', img:'https://picsum.photos/seed/a43/96' },
+      { name:'Dr. Prerna Kapoor', city:'Gurgaon, HR', specialty:'Trauma', contact:'+91-90000-10039', img:'https://picsum.photos/seed/a44/96' },
+      { name:'Dr. Veer Chauhan', city:'Noida, UP', specialty:'Adolescents', contact:'+91-90000-10040', img:'https://picsum.photos/seed/a45/96' },
+      { name:'Dr. Punit Malhotra', city:'Ghaziabad, UP', specialty:'Anxiety', contact:'+91-90000-10041', img:'https://picsum.photos/seed/a46/96' },
+      { name:'Dr. Leena Kapoor', city:'Dehradun, UK', specialty:'Depression', contact:'+91-90000-10042', img:'https://picsum.photos/seed/a47/96' },
+      { name:'Dr. Ajay Bansal', city:'Shimla, HP', specialty:'Relationships', contact:'+91-90000-10043', img:'https://picsum.photos/seed/a48/96' },
+      { name:'Dr. Nandita Rath', city:'Raipur, CG', specialty:'Trauma', contact:'+91-90000-10044', img:'https://picsum.photos/seed/a49/96' },
+      { name:'Dr. Harshita V', city:'Pondicherry, PY', specialty:'Adolescents', contact:'+91-90000-10045', img:'https://picsum.photos/seed/a50/96' }
+    ];
+
+    const list = document.getElementById('results');
+    function render(items){
+      list.innerHTML = '';
+      if(!items.length){
+        const empty = document.createElement('div');
+        empty.className = 'list-group-item therapist-card';
+        empty.textContent = 'No results found. Try different filters.';
+        list.appendChild(empty);
+        return;
+      }
+      items.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'list-group-item therapist-card';
+        const img = document.createElement('img'); img.className='thumb'; img.src = t.img; img.alt = t.name;
+        const body = document.createElement('div');
+        body.innerHTML = `<strong>${t.name}</strong><div class="meta">${t.city} • ${t.specialty}</div><div><small>${t.contact}</small></div>`;
+        card.appendChild(img); card.appendChild(body);
+        list.appendChild(card);
+      });
+    }
+
+    render(DATA);
+
+    document.getElementById('search-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const city = document.getElementById('city').value.trim().toLowerCase();
+      const spec = document.getElementById('specialty').value.trim().toLowerCase();
+      const filtered = DATA.filter(d =>
+        (!city || d.city.toLowerCase().includes(city)) &&
+        (!spec || d.specialty.toLowerCase() === spec)
+      );
+      render(filtered);
+    });
+  </script>
+
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/chatbot-widget.js"></script>
+</body>
+</html>

@@ -282,8 +282,9 @@ a:focus {
 
 .hero .hero-image {
     position: relative;
-    height: 600px;
-    width: 600px;
+    height: auto;
+    width: 100%;
+    max-width: 480px;
     text-align: right;
     margin-right: 35px;
     padding-top: 130px;
@@ -291,6 +292,8 @@ a:focus {
 }
 
 .hero .hero-image img {
+    max-width: 100%;
+    height: auto;
     border-radius: 100%;
 }
 
@@ -345,6 +348,13 @@ div.hero-btn {
     .hero .hero-text {
         padding: 0 15px;
     }
+    .hero .hero-image {
+        max-width: 360px;
+        margin: 0 auto;
+        padding-top: 40px;
+        padding-right: 0;
+        text-align: center;
+    }
     .hero .hero-text h1 {
         font-size: 35px;
     }
@@ -362,6 +372,9 @@ div.hero-btn {
         font-size: 30px;
         font-weight: bold;
     }
+    .hero .hero-image {
+        max-width: 300px;
+    }
     .hero .hero-text p {
         font-size: 14px;
         font-weight: 500;
@@ -377,6 +390,9 @@ div.hero-btn {
     .hero .hero-text h1 {
         font-size: 25px;
         font-weight: 600;
+    }
+    .hero .hero-image {
+        max-width: 240px;
     }
     .hero .hero-text p {
         font-size: 14px;

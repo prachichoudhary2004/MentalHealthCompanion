@@ -42,8 +42,7 @@ function addEntryToDom(event) {
 
         const entryDate = document.createElement(`p`);
         entryDate.className = `single-entry-date`;
-        // eslint-disable-next-line no-cond-assign
-        if ((getEntryTitle[0].value = getEntryTitle[0].value)) {
+        if (getEntryTitle[0].value) {
                 entryDate.textContent = `Date Added: ${day} ${n} ${year}`;
                 entryDiv.appendChild(entryDate);
         }
