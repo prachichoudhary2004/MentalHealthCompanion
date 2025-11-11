@@ -39,6 +39,7 @@
       #results .meta { font-size: 13px; color:#666; }
       #search-form .btn-primary { background:#006622; border-color:#006622; }
       h2 { color:#006622; }
+      #map{ height: 360px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,.06); }
     </style>
     <div class="section-header text-center">
       <h2>Find a Therapist</h2>
@@ -59,8 +60,15 @@
     </form>
 
     <div id="results" class="list-group"></div>
+    <div class="mt-4">
+      <h5 class="mb-2">Map</h5>
+      <div id="map"></div>
+      <small class="text-muted">Map centers on your search city using OpenStreetMap.</small>
+    </div>
   </div>
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const DATA = [
       { name:'Dr. Aisha Kumar', city:'Bengaluru, KA', specialty:'Anxiety', contact:'+91-90000-11111', img:'https://picsum.photos/seed/a1/96' },
@@ -138,6 +146,25 @@
 
     render(DATA);
 
+    // Map init
+    var map = L.map('map').setView([20.5937, 78.9629], 5); // India
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(map);
+    var marker;
+
+    async function centerOnCity(city){
+      if(!city){ map.setView([20.5937, 78.9629], 5); if(marker){ map.removeLayer(marker);} return; }
+      try{
+        var res = await fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(city + ', India'));
+        var data = await res.json();
+        if(data && data[0]){
+          var lat = parseFloat(data[0].lat), lon = parseFloat(data[0].lon);
+          map.setView([lat, lon], 11);
+          if(marker){ map.removeLayer(marker); }
+          marker = L.marker([lat, lon]).addTo(map);
+        }
+      }catch(e){ /* silent fail to avoid breaking existing page */ }
+    }
+
     document.getElementById('search-form').addEventListener('submit', function(e){
       e.preventDefault();
       const city = document.getElementById('city').value.trim().toLowerCase();
@@ -147,7 +174,11 @@
         (!spec || d.specialty.toLowerCase() === spec)
       );
       render(filtered);
+      centerOnCity(city);
     });
+
+    // Center map on initial city if any
+    centerOnCity('India');
   </script>
 
   <script src="../scripts/api.js"></script>

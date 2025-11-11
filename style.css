@@ -3745,3 +3745,57 @@ img {
     background-color: black;
     padding: 3%;
 }
+
+/* Palette overrides */
+:root{
+  --sz-bg-start:#cfe9ff; /* soft sky */
+  --sz-bg-end:#ffc7ce;   /* soft pink */
+  --sz-bg-mid:#cfead3;   /* mint */
+  --sz-text:#1f2a44;     /* deep slate */
+  --sz-accent:#ffc7ce;   /* pink */
+  --sz-accent-2:#cfe9ff; /* blue */
+  --sz-accent-3:#cfead3; /* green */
+}
+
+body{
+  color: var(--sz-text);
+  background: linear-gradient(180deg,var(--sz-bg-start), var(--sz-bg-mid) 50%, var(--sz-bg-end));
+}
+
+.navbar{
+  background: linear-gradient(90deg,var(--sz-accent-2), var(--sz-accent-3)) !important;
+}
+.navbar.nav-sticky{
+  background: linear-gradient(90deg,var(--sz-accent-2), var(--sz-accent-3)) !important;
+}
+.navbar a.nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active{
+  background: rgba(255,255,255,0.3);
+}
+
+.hero{
+  background: radial-gradient(1200px 600px at 70% 20%, var(--sz-bg-mid), var(--sz-bg-end) 60%, var(--sz-bg-start));
+}
+.hero .hero-text h1,
+.hero .hero-text p{ color: var(--sz-text); }
+.hero .hero-btn .btn:first-child{ background: var(--sz-accent); border-color: var(--sz-accent); }
+.hero .hero-btn .btn:last-child{ background: var(--sz-accent-2); border-color: var(--sz-accent-2); }
+.hero .hero-btn .btn:hover{ filter: brightness(1.03); }
+
+.service{ background: rgba(255,255,255,0.65); }
+.service .service-item:hover{ background:#ffffff; box-shadow:0 12px 24px rgba(0,0,0,.08); }
+.service .service-icon:before,
+.service .service-icon:after{ background: var(--sz-accent-3); }
+
+.page-header{ background: linear-gradient(180deg,var(--sz-accent-2), var(--sz-accent-3)); }
+
+.footer{ background: linear-gradient(90deg,var(--sz-accent-3), var(--sz-accent-2)); }
+.footer .footer-info .footer-logo{ color: var(--sz-accent); }
+
+/* Buttons quick theme */
+.btn-primary, .btn-success{
+  background: var(--sz-accent-3);
+  border-color: var(--sz-accent-3);
+}
+.btn-outline-danger{ border-color: var(--sz-accent); color: var(--sz-text); }
+.btn-outline-danger:hover{ background: var(--sz-accent); border-color: var(--sz-accent); }
